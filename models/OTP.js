@@ -30,4 +30,9 @@ async function sendVarificationEamil(email, otp){
     }
 }
 
+OTPSchema.pre("save", async function(next){
+    await sendVarificationEamil(this.email, this.otp);
+    next();
+})
+
 module.exports = mongoose.model("OTP", OTPSchema);

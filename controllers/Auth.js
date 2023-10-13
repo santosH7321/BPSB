@@ -41,7 +41,7 @@ exports.SendOTP = async(req, res) => {
                 specialChars:false,
             });
 
-            result = await OTP.findOne({otp: otp});
+             result = await OTP.findOne({otp: otp});
         }
         const otpPayload = {email, otp};
         //create an entry in for otp 
@@ -61,7 +61,7 @@ exports.SendOTP = async(req, res) => {
         console.log(error);
         return res.status(500).json({
             success:false,
-            massage:error.massage,
+            massage: error.massage,
         })
     }
 }
@@ -102,7 +102,7 @@ exports.signUp = async(req, res) => {
                 });
             }
             //find most resent otp stored for the user
-            const recentOtp = await OTP.find({email}.sort({createdAt:-1}).limit(1));
+            const recentOtp = await OTP.find({email}).sort({createdAt:-1}).limit(1);
             console.log(recentOtp);
 
             //validation OTP
@@ -112,8 +112,7 @@ exports.signUp = async(req, res) => {
                     success:false,
                     massage:'OTP found',
                 })
-            }
-            else if(otp !== recentOtp){
+            } else if(otp !== recentOtp.otp){
                 //Invalid otp
                 return res.status(400).json({
                     success:false,

@@ -235,7 +235,7 @@ exports.login = async (req, res) => {
 };
 
 //changePassword
-//TODO: HOMEWORK
+
 exports.changePassword = async (req, res) => {
     //get data from req body
     //get oldPassword, newPassword, confirmNewPassowrd
